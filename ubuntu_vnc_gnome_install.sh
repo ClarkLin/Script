@@ -36,16 +36,17 @@ function InstallVnc(){
 function ConfitVnc(){
 	useradd vncuser
 	mkdir /home/vncuser/
-	chown -Rf vncuser /home/vncuser/
-	su - vncuser -c "(echo $VNC_PW && echo $VNC_PW) | vncpasswd"
-	su - vncuser -c "vncserver :74"
+	chown -Rf vncuser.vncuser /home/vncuser/
+	su - vncuser -c "(echo $VNC_PW && echo $VNC_PW) | vncserver :74"
 	su - vncuser -c "vncserver -kill :74"
 	su - vncuser -c "rm ~/.vnc/xstartup"
 	su - vncuser -c "cd ~/.vnc/ && wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-gnome-vnc/master/.vnc/xstartup"
+	su - vncuser -c "chmod a+x ~/.vnc/xstartup"
 }
 
 function StartVnc(){
-	echo 'su - vncuser -c "vncserver :74"' >> /etc/rc.local
+	echo 'su - vncuser -c "vncserver :74"' > /etc/rc.local
+	echo 'exit 0' >> /etc/rc.local
 	su - vncuser -c "vncserver -kill :74"
 	rm -rf /tmp/.X*
 	su - vncuser -c "vncserver :74"
