@@ -38,22 +38,22 @@ function ConfitVnc(){
 	mkdir ~/.vnc
 	chown -Rf vncuser /home/vncuser/
 	su - vncuser -c "(echo $VNC_PW && echo $VNC_PW) | vncpasswd"
-	echo "#!/bin/sh" > ~/.vnc/xstartup
-	echo "export XKL_XMODMAP_DISABLE=1" >> ~/.vnc/xstartup
-	echo "unset SESSION_MANAGER" >> ~/.vnc/xstartup
-	echo "unset DBUS_SESSION_BUS_ADDRESS" >> ~/.vnc/xstartup
-	echo "gnome-panel &" >> ~/.vnc/xstartup
-	echo "gnome-settings-daemon &" >> ~/.vnc/xstartup
-	echo "metacity &" >> ~/.vnc/xstartup
-	echo "nautilus &" >> ~/.vnc/xstartup
-	echo "gnome-terminal &" >> ~/.vnc/xstartup
-	echo "vncconfig &" >> ~/.vnc/xstartup
+	su - vncuser -c "echo "#!/bin/sh" > ~/.vnc/xstartup"
+	su - vncuser -c "echo "export XKL_XMODMAP_DISABLE=1" >> ~/.vnc/xstartup"
+	su - vncuser -c "echo "unset SESSION_MANAGER" >> ~/.vnc/xstartup"
+	su - vncuser -c "echo "unset DBUS_SESSION_BUS_ADDRESS" >> ~/.vnc/xstartup"
+	su - vncuser -c "echo "gnome-panel &" >> ~/.vnc/xstartup"
+	su - vncuser -c "echo "gnome-settings-daemon &" >> ~/.vnc/xstartup"
+	su - vncuser -c "echo "metacity &" >> ~/.vnc/xstartup"
+	su - vncuser -c "echo "nautilus &" >> ~/.vnc/xstartup"
+	su - vncuser -c "echo "gnome-terminal &" >> ~/.vnc/xstartup"
+	su - vncuser -c "echo "vncconfig &" >> ~/.vnc/xstartup"
 }
 
 function StartVnc(){
 	echo 'su - vncuser -c "vncserver :74"' >> /etc/rc.local
 	su - vncuser -c "vncserver -kill :74"
-	rm /tmp/X*
+	rm /tmp/.X*
 	su - vncuser -c "vncserver :74"
 }
 
