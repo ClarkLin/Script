@@ -22,6 +22,7 @@ function ChangeUbuntuSources(){
 	sudo echo "deb-src http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse" >> /etc/apt/sources.list
 	sudo echo "deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse" >> /etc/apt/sources.list
 	sudo apt-get update
+	sudo echo "103.245.222.133 raw.githubusercontent.com" >> /etc/hosts
 }
 
 function InstallGnome(){
@@ -35,7 +36,7 @@ function InstallVnc(){
 function ConfitVnc(){
 	useradd vncuser
 	mkdir /home/vncuser/
-	mkdir ~/.vnc
+	mkdir /home/vncuser/.vnc
 	chown -Rf vncuser /home/vncuser/
 	su - vncuser -c "(echo $VNC_PW && echo $VNC_PW) | vncpasswd"
 	su - vncuser -c "cd ~/.vnc/ && wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-gnome-vnc/master/.vnc/xstartup"
