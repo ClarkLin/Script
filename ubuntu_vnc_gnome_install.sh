@@ -38,16 +38,7 @@ function ConfitVnc(){
 	mkdir ~/.vnc
 	chown -Rf vncuser /home/vncuser/
 	su - vncuser -c "(echo $VNC_PW && echo $VNC_PW) | vncpasswd"
-	su - vncuser -c "echo "#!/bin/sh" > ~/.vnc/xstartup"
-	su - vncuser -c "echo "export XKL_XMODMAP_DISABLE=1" >> ~/.vnc/xstartup"
-	su - vncuser -c "echo "unset SESSION_MANAGER" >> ~/.vnc/xstartup"
-	su - vncuser -c "echo "unset DBUS_SESSION_BUS_ADDRESS" >> ~/.vnc/xstartup"
-	su - vncuser -c "echo "gnome-panel &" >> ~/.vnc/xstartup"
-	su - vncuser -c "echo "gnome-settings-daemon &" >> ~/.vnc/xstartup"
-	su - vncuser -c "echo "metacity &" >> ~/.vnc/xstartup"
-	su - vncuser -c "echo "nautilus &" >> ~/.vnc/xstartup"
-	su - vncuser -c "echo "gnome-terminal &" >> ~/.vnc/xstartup"
-	su - vncuser -c "echo "vncconfig &" >> ~/.vnc/xstartup"
+	su - vncuser -c "cd ~/.vnc/ && wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-gnome-vnc/master/.vnc/xstartup"
 }
 
 function StartVnc(){
