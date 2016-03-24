@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 #Created by Clark Lin 2016.3.24
 
 function GetVncPasswd(){
