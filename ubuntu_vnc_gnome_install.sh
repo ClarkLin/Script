@@ -49,6 +49,7 @@ function StartVnc(){
 }
 
 function Main(){
+	VNC_PW=vncuser
 	GetVncPasswd
 	ChangeUbuntuSources
 	InstallGnome
