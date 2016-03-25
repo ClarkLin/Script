@@ -33,6 +33,15 @@ function InstallVnc(){
 	sudo apt-get -y install vnc4server language-pack-zh-hant-base language-pack-zh-hans-base screenlets ttf-wqy-zenhei
 }
 
+function InstallBorwer(){
+	sudo apt-get install firefox
+	sudo wget bm.jacashop.com/download/maxthon-browser-stable_1.0.5.3_amd64.deb
+	sudo dpkg -i maxthon-browser-stable_1.0.5.3_amd64.deb
+	sudo wget wget bm.jacashop.com/download/google-chrome-stable_current_amd64.deb
+	sudo dpkg -i google-chrome-stable_current_amd64.deb
+	sudo apt-get install -f -y
+}
+
 function ConfitVnc(){
 	useradd vncuser
 	mkdir /home/vncuser/
@@ -42,6 +51,14 @@ function ConfitVnc(){
 	su - vncuser -c "rm ~/.vnc/xstartup"
 	su - vncuser -c "cd ~/.vnc/ && wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-xfce-vnc/master/.vnc/xstartup"
 	su - vncuser -c "chmod a+x ~/.vnc/xstartup"
+	mkdir /home/vncuser/Desktop/
+	cd /home/vncuser/Desktop/
+	wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-gnome-vnc/master/Desktop/firefox.desktop
+	wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-gnome-vnc/master/Desktop/google-chrome.desktop
+	wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-gnome-vnc/master/Desktop/libreoffice-calc.desktop
+	wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-gnome-vnc/master/Desktop/libreoffice-writer.desktop
+	wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-gnome-vnc/master/Desktop/maxthon.desktop
+	chown -Rf vncuser.vncuser /home/vncuser/
 }
 
 function StartVnc(){
@@ -58,6 +75,7 @@ function Main(){
 	ChangeUbuntuSources
 	InstallGnome
 	InstallVnc
+	InstallBorwer
 	ConfitVnc
 	StartVnc
 }
