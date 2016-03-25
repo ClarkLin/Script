@@ -26,7 +26,7 @@ function ChangeUbuntuSources(){
 }
 
 function InstallGnome(){
-	sudo apt-get -y install xfce4 libreoffice-writer libreoffice-calc 
+	sudo apt-get -y install xfce4 xfce4-panel libreoffice-writer libreoffice-calc 
 }
 
 function InstallVnc(){
