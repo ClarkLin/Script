@@ -1,12 +1,12 @@
 #!/bin/bash
-#Created by Clark Lin 2016.3.25
+#Created by Clark Lin 2016.3.24
 
 function GetVncPasswd(){
-  echo ""
-  echo "---------Please Note--------------"
-  echo "This script is used to install Xfce Desktop and VNC service on Ubuntu 14.04"
-  echo "----------------------------------"
-  read -p "Please enter the VNC password you want (default: vncuser): " VNC_PW
+        echo ""
+        echo "---------Please Note--------------"
+        echo "This script is used to install Gnome Desktop and VNC service on Ubuntu 14.04"
+        echo "----------------------------------"
+        read -p "Please enter the VNC password you want (default: vncuser): " VNC_PW
 }
 
 function ChangeUbuntuSources(){
@@ -26,20 +26,11 @@ function ChangeUbuntuSources(){
 }
 
 function InstallGnome(){
-	sudo apt-get -y install xfce4 libreoffice-writer libreoffice-calc
+	sudo apt-get -y install xorg gdm ubuntu-desktop gnome-core
 }
 
 function InstallVnc(){
-	sudo apt-get -y install vnc4server language-pack-zh-hant-base language-pack-zh-hans-base screenlets ttf-wqy-zenhei
-}
-
-function InstallBorwer(){
-	sudo apt-get install firefox
-	sudo wget bm.jacashop.com/download/maxthon-browser-stable_1.0.5.3_amd64.deb
-	sudo dpkg -i maxthon-browser-stable_1.0.5.3_amd64.deb
-	sudo wget wget bm.jacashop.com/download/google-chrome-stable_current_amd64.deb
-	sudo dpkg -i google-chrome-stable_current_amd64.deb
-	sudo apt-get install -f -y
+	sudo apt-get -y install vnc4server language-pack-zh-hant-base language-pack-zh-hans-base screenlets
 }
 
 function ConfitVnc(){
@@ -49,16 +40,8 @@ function ConfitVnc(){
 	su - vncuser -c "(echo $VNC_PW && echo $VNC_PW) | vncserver :74"
 	su - vncuser -c "vncserver -kill :74"
 	su - vncuser -c "rm ~/.vnc/xstartup"
-	su - vncuser -c "cd ~/.vnc/ && wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-xfce-vnc/master/.vnc/xstartup"
+	su - vncuser -c "cd ~/.vnc/ && wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-gnome-vnc/master/.vnc/xstartup"
 	su - vncuser -c "chmod a+x ~/.vnc/xstartup"
-	mkdir /home/vncuser/Desktop/
-	cd /home/vncuser/Desktop/
-	wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-gnome-vnc/master/Desktop/firefox.desktop
-	wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-gnome-vnc/master/Desktop/google-chrome.desktop
-	wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-gnome-vnc/master/Desktop/libreoffice-calc.desktop
-	wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-gnome-vnc/master/Desktop/libreoffice-writer.desktop
-	wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-gnome-vnc/master/Desktop/maxthon.desktop
-	chown -Rf vncuser.vncuser /home/vncuser/
 }
 
 function StartVnc(){
@@ -75,7 +58,6 @@ function Main(){
 	ChangeUbuntuSources
 	InstallGnome
 	InstallVnc
-	InstallBorwer
 	ConfitVnc
 	StartVnc
 }
