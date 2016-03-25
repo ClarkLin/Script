@@ -42,6 +42,14 @@ function ConfitVnc(){
 	su - vncuser -c "rm ~/.vnc/xstartup"
 	su - vncuser -c "cd ~/.vnc/ && wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-gnome-vnc/master/.vnc/xstartup"
 	su - vncuser -c "chmod a+x ~/.vnc/xstartup"
+	mkdir /home/vncuser/Desktop/
+	cd /home/vncuser/Desktop/
+	wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-gnome-vnc/master/Desktop/firefox.desktop
+	wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-gnome-vnc/master/Desktop/google-chrome.desktop
+	wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-gnome-vnc/master/Desktop/libreoffice-calc.desktop
+	wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-gnome-vnc/master/Desktop/libreoffice-writer.desktop
+	wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-gnome-vnc/master/Desktop/maxthon.desktop
+	chown -Rf vncuser.vncuser /home/vncuser/
 }
 
 function StartVnc(){
@@ -58,6 +66,7 @@ function Main(){
 	ChangeUbuntuSources
 	InstallGnome
 	InstallVnc
+	InstallBorwer
 	ConfitVnc
 	StartVnc
 }
