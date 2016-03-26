@@ -30,8 +30,17 @@ function InstallGnome(){
 }
 
 function InstallVnc(){
-	sudo apt-get -y install vnc4server language-pack-zh-hant-base language-pack-zh-hans-base screenlets
+	sudo apt-get -y install vnc4server language-pack-zh-hant-base language-pack-zh-hans-base screenlets ttf-wqy-zenhei
 }
+ 
+function InstallBorwer(){
+	sudo apt-get install firefox
+	sudo wget bm.jacashop.com/download/maxthon-browser-stable_1.0.5.3_amd64.deb
+	sudo dpkg -i maxthon-browser-stable_1.0.5.3_amd64.deb
+	sudo wget wget bm.jacashop.com/download/google-chrome-stable_current_amd64.deb
+	sudo dpkg -i google-chrome-stable_current_amd64.deb
+ 	sudo apt-get install -f -y
+ }
 
 function ConfitVnc(){
 	useradd vncuser
