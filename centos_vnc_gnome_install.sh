@@ -37,15 +37,15 @@ function ConfigVnc(){
 	su - vncuser -c "(echo $VNC_PW && echo $VNC_PW) | vncserver :74"
 	su - vncuser -c "vncserver -kill :74"
 	yum update -y
-	cp /usr/share/applications/google-chrome.desktop /home/vncuser/Desktop/
-	cp /usr/share/applications/libreoffice-writer.desktop /home/vncuser/Desktop/
-	cp /usr/share/applications/libreoffice-calc.desktop /home/vncuser/Desktop/
-	chown vncuser -Rf /home/vncuser/Desktop/*
 }
 
 function StartVnc(){
 	sudo systemctl enable vncserver@:74.service
 	sudo systemctl start vncserver@:74.service
+	cp /usr/share/applications/google-chrome.desktop /home/vncuser/Desktop/
+	cp /usr/share/applications/libreoffice-writer.desktop /home/vncuser/Desktop/
+	cp /usr/share/applications/libreoffice-calc.desktop /home/vncuser/Desktop/
+	chown vncuser -Rf /home/vncuser/Desktop/*
 }
 
 function Main(){
