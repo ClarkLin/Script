@@ -52,7 +52,7 @@ function Main(){
 	GetVncPasswd
 	InstallGnome
 	InstallVnc
-	InstallBrower(
+	InstallBrower
 	ConfigVnc
 	StartVnc
 }
