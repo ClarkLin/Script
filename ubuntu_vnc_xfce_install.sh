@@ -64,6 +64,7 @@ function ConfitVnc(){
 function StartVnc(){
 	echo 'su - vncuser -c "vncserver :74"' > /etc/rc.local
 	echo 'exit 0' >> /etc/rc.local
+	sudo chmod a+x /etc/rc.local
 	su - vncuser -c "vncserver -kill :74"
 	rm -rf /tmp/.X*
 	su - vncuser -c "vncserver :74"
