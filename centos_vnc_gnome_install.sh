@@ -45,6 +45,7 @@ function ConfigVnc(){
 function StartVnc(){
 	sudo systemctl enable vncserver@:$VNC_PORT.service
 	sudo systemctl start vncserver@:$VNC_PORT.service
+	wait
 	if [[ ! -a "/home/vncuser/Desktop/google-chrome.desktop" ]]; then
 		cp /usr/share/applications/google-chrome.desktop /home/vncuser/Desktop/
 	fi
