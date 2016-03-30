@@ -7,6 +7,7 @@ function GetVncPasswd(){
         echo "This script is used to install Gnome Desktop and VNC service on Ubuntu 14.04"
         echo "----------------------------------"
         read -p "Please enter the VNC password you want (default: vncuser): " VNC_PW
+        read -p "Please enter the VNC port you want (default: 74): " VNC_PORT
 }
 
 function ChangeUbuntuSources(){
@@ -46,8 +47,8 @@ function ConfitVnc(){
 	useradd vncuser
 	mkdir /home/vncuser/
 	chown -Rf vncuser.vncuser /home/vncuser/
-	su - vncuser -c "(echo $VNC_PW && echo $VNC_PW) | vncserver :74"
-	su - vncuser -c "vncserver -kill :74"
+	su - vncuser -c "(echo $VNC_PW && echo $VNC_PW) | vncserver :$VNC_PORT"
+	su - vncuser -c "vncserver -kill :$VNC_PORT"
 	su - vncuser -c "rm ~/.vnc/xstartup"
 	su - vncuser -c "cd ~/.vnc/ && wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-gnome-vnc/master/.vnc/xstartup"
 	su - vncuser -c "chmod a+x ~/.vnc/xstartup"
@@ -62,16 +63,17 @@ function ConfitVnc(){
 }
 
 function StartVnc(){
-	echo 'su - vncuser -c "vncserver :74"' > /etc/rc.local
+	echo 'su - vncuser -c "vncserver :$VNC_PORT"' > /etc/rc.local
 	sudo chmod a+x /etc/rc.local
 	echo 'exit 0' >> /etc/rc.local
-	su - vncuser -c "vncserver -kill :74"
+	su - vncuser -c "vncserver -kill :$VNC_PORT"
 	rm -rf /tmp/.X*
-	su - vncuser -c "vncserver :74"
+	su - vncuser -c "vncserver :$VNC_PORT"
 }
 
 function Main(){
 	VNC_PW=vncuser
+	VNC_PORT=74
 	GetVncPasswd
 	ChangeUbuntuSources
 	InstallGnome
