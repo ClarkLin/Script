@@ -36,9 +36,13 @@ function InstallVnc(){
  
 function InstallBorwer(){
 	sudo apt-get install firefox
-	sudo wget bm.jacashop.com/download/maxthon-browser-stable_1.0.5.3_amd64.deb
+	if [[ ! -a "maxthon-browser-stable_1.0.5.3_amd64.deb" ]]; then
+		sudo wget bm.jacashop.com/download/maxthon-browser-stable_1.0.5.3_amd64.deb
+	fi
 	sudo dpkg -i maxthon-browser-stable_1.0.5.3_amd64.deb
-	sudo wget wget bm.jacashop.com/download/google-chrome-stable_current_amd64.deb
+	if [[ ! -a "google-chrome-stable_current_amd64.deb" ]]; then
+		sudo wget wget bm.jacashop.com/download/google-chrome-stable_current_amd64.deb
+	fi
 	sudo dpkg -i google-chrome-stable_current_amd64.deb
  	sudo apt-get install -f -y
  }
@@ -54,12 +58,23 @@ function ConfitVnc(){
 	su - vncuser -c "chmod a+x ~/.vnc/xstartup"
 	mkdir /home/vncuser/Desktop/
 	cd /home/vncuser/Desktop/
-	wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-gnome-vnc/master/Desktop/firefox.desktop
-	wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-gnome-vnc/master/Desktop/google-chrome.desktop
-	wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-gnome-vnc/master/Desktop/libreoffice-calc.desktop
-	wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-gnome-vnc/master/Desktop/libreoffice-writer.desktop
-	wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-gnome-vnc/master/Desktop/maxthon.desktop
+	if [[ ! -a "/home/vncuser/Desktop/firefox.desktop" ]]; then
+		wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-gnome-vnc/master/Desktop/firefox.desktop
+	fi
+	if [[ ! -a "/home/vncuser/Desktop/google-chrome.desktop" ]]; then
+		wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-gnome-vnc/master/Desktop/google-chrome.desktop
+	fi
+	if [[ ! -a "/home/vncuser/Desktop/libreoffice-calc.desktop" ]]; then
+		wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-gnome-vnc/master/Desktop/libreoffice-calc.desktop
+	fi
+	if [[ ! -a "/home/vncuser/Desktop/libreoffice-writer.desktop" ]]; then
+		wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-gnome-vnc/master/Desktop/libreoffice-writer.desktop
+	fi
+	if [[ ! -a "/home/vncuser/Desktop/maxthon.desktop" ]]; then
+		wget https://raw.githubusercontent.com/ClarkLin/docker-ubuntu-gnome-vnc/master/Desktop/maxthon.desktop
+	fi
 	chown -Rf vncuser.vncuser /home/vncuser/
+	chmod a+x /home/vncuser/Desktop/*.desktop
 }
 
 function StartVnc(){
