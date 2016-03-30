@@ -30,7 +30,7 @@ function InstallVnc(){
 
 function InstallBrower(){
 	if [[ ! -a "google-chrome-stable_current_x86_64.rpm" ]]; then
-			wget bm.jacashop.com/download/google-chrome-stable_current_x86_64.rpm
+		wget bm.jacashop.com/download/google-chrome-stable_current_x86_64.rpm
 	fi
 	yum localinstall -y google-chrome-stable_current_x86_64.rpm
 }
