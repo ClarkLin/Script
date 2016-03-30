@@ -63,8 +63,7 @@ function ConfitVnc(){
 }
 
 function StartVnc(){
-	echo 'su - vncuser -c "vncserver :$VNC_PORT"' > /etc/rc.local
-	sudo chmod a+x /etc/rc.local
+	echo "su - vncuser -c \"vncserver :$VNC_PORT\"" > /etc/rc.local
 	echo 'exit 0' >> /etc/rc.local
 	su - vncuser -c "vncserver -kill :$VNC_PORT"
 	rm -rf /tmp/.X*
