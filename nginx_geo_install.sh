@@ -69,3 +69,5 @@ sed '/include\ vhost/i \\tinclude\ conf\.d\/\*\.conf\;' -i /usr/local/nginx/conf
 
 # Restart AMH
 service amh-start restart
+
+GitInstall
