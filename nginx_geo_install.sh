@@ -63,9 +63,7 @@ gunzip -f /var/GeoIP/GeoIP.dat.gz
 gunzip -f /var/GeoIP/GeoLiteCity.dat.gz
 
 # Configure GEO 
-sed '/include\ vhost/i \\tinclude\ conf\.d\/\*\.conf\;' -i /usr/local/nginx/conf/nginx.conf
-
-#sed '/default\_type/i \\tinclude\ conf\.d\/location\/eu.conf\;' -i nginx.conf  
+sed '/include\ vhost/i \\tinclude\ block_ip\/\*\.conf\;' -i /usr/local/nginx/conf/nginx.conf
 
 # Restart AMH
 service amh-start restart
